@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/skos-ninja/truelayer-tech/svc/pokemon/app"
+	"github.com/skos-ninja/truelayer-tech/svc/pokemon/rpc"
+
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
 )
@@ -35,6 +38,11 @@ func runE(cmd *cobra.Command, args []string) error {
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"status": "OK"})
 	})
+
+	app := app.New()
+	rpc := rpc.New(app)
+
+	r.GET("/pokemon/:id", rpc.GetPokemon)
 
 	// As this is designed to be run inside a container we should only
 	// allow binding to 0.0.0.0 due to how networking is done within docker.
