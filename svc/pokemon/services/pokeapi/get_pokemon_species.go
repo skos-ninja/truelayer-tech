@@ -28,6 +28,7 @@ func (p *service) GetPokemonSpecies(ctx context.Context, pokemon string) (*model
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
 		if resp.StatusCode == http.StatusNotFound {
@@ -36,8 +37,6 @@ func (p *service) GetPokemonSpecies(ctx context.Context, pokemon string) (*model
 
 		return nil, fmt.Errorf("PokeAPI returned: %v", resp.Status)
 	}
-
-	defer resp.Body.Close()
 
 	species := &models.PokemonSpecies{}
 	err = json.NewDecoder(resp.Body).Decode(species)
