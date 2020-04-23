@@ -15,7 +15,7 @@ type App interface {
 }
 
 type app struct {
-	pokeAPI pokeapi.PokeAPI
+	pokeAPI pokeapi.Service
 }
 
 func New() App {

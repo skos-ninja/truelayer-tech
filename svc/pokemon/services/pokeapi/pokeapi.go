@@ -13,16 +13,16 @@ import (
 
 const baseURL = "https://pokeapi.co"
 
-type PokeAPI interface {
+type Service interface {
 	GetPokemonSpecies(ctx context.Context, pokemon string) (*models.PokemonSpecies, error)
 }
 
-type pokeAPI struct {
+type service struct {
 	client *http.Client
 }
 
-func New(cacheSize int) PokeAPI {
-	return &pokeAPI{
+func New(cacheSize int) Service {
+	return &service{
 		client: http.DefaultClient,
 	}
 }
