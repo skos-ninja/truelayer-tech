@@ -39,7 +39,11 @@ func runE(cmd *cobra.Command, args []string) error {
 		c.JSON(http.StatusOK, gin.H{"status": "OK"})
 	})
 
-	app := app.New()
+	app, err := app.New(128)
+	if err != nil {
+		return err
+	}
+
 	rpc := rpc.New(app)
 
 	r.GET("/pokemon/:id", rpc.GetPokemon)
