@@ -10,8 +10,19 @@ func (a *app) GetShakespearPokemonDescription(ctx context.Context, pokemon strin
 		return "", err
 	}
 
-	// TODO: filter here to find the correct description
-	description, err := a.GetShakespearText(ctx, species.FlavorTextEntries[0].FlavorText)
+	// Filter to find the first description that is in english.
+	//
+	// It is presumed here that all the descriptions are in version order.
+	// As such selecting the first description will select the latest version.
+	flavorText := ""
+	for _, flavor := range species.FlavorTextEntries {
+		if flavor.Language.Name == "en" {
+			flavorText = flavor.FlavorText
+			break
+		}
+	}
+
+	description, err := a.GetShakespearText(ctx, flavorText)
 	if err != nil {
 		return "", err
 	}
