@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/skos-ninja/truelayer-tech/svc/pokemon"
+
 	"github.com/spf13/cobra"
 )
 
@@ -13,6 +15,7 @@ func init() {
 	root.PersistentFlags().Int("port", 8080, "Port to listen on")
 
 	// Add sub commands here
+	root.AddCommand(pokemon.CMD)
 }
 
 func main() {
