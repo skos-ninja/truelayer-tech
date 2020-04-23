@@ -21,7 +21,7 @@ type service struct {
 	client *http.Client
 }
 
-func New(cacheSize int) Service {
+func New() Service {
 	return &service{
 		client: http.DefaultClient,
 	}
