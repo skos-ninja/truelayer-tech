@@ -2,6 +2,7 @@ package app
 
 import (
 	"context"
+	"errors"
 )
 
 func (a *app) GetShakespearePokemonDescription(ctx context.Context, pokemon string) (string, error) {
@@ -20,6 +21,10 @@ func (a *app) GetShakespearePokemonDescription(ctx context.Context, pokemon stri
 			flavorText = flavor.FlavorText
 			break
 		}
+	}
+
+	if flavorText == "" {
+		return "", errors.New("pokemon has no description")
 	}
 
 	description, err := a.GetShakespeareText(ctx, flavorText)
