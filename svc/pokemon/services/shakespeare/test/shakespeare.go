@@ -7,6 +7,10 @@ import (
 	"github.com/skos-ninja/truelayer-tech/svc/pokemon/services/shakespeare"
 )
 
+const (
+	TranslatedText = "translated"
+)
+
 var ErrExpected = errors.New("expected error")
 
 type testService struct {
@@ -18,7 +22,7 @@ func (t *testService) ConvertText(ctx context.Context, text string) (string, err
 		return "", ErrExpected
 	}
 
-	return "translated", nil
+	return TranslatedText, nil
 }
 
 func New(success bool) shakespeare.Service {
