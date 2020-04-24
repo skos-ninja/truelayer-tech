@@ -6,7 +6,7 @@ import (
 	sTest "github.com/skos-ninja/truelayer-tech/svc/pokemon/services/shakespeare/test"
 )
 
-func NewTestApp(pokemon, translation bool) App {
+func newTestApp(pokemon, translation bool) *app {
 	pokeAPI := pTest.New(pokemon)
 	pLRU, _ := simplelru.NewLRU(1, nil)
 

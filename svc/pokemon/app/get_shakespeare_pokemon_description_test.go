@@ -12,7 +12,7 @@ import (
 
 func TestGetShakespearePokemonDescriptionNotFound(t *testing.T) {
 	ctx := context.Background()
-	a := NewTestApp(false, false)
+	a := newTestApp(false, false)
 	const pokemon = "test"
 
 	v, err := a.GetShakespearePokemonDescription(ctx, pokemon)
@@ -23,7 +23,7 @@ func TestGetShakespearePokemonDescriptionNotFound(t *testing.T) {
 
 func TestGetShakespearePokemonDescriptionFailedTranslation(t *testing.T) {
 	ctx := context.Background()
-	a := NewTestApp(true, false)
+	a := newTestApp(true, false)
 	const pokemon = "test"
 
 	v, err := a.GetShakespearePokemonDescription(ctx, pokemon)
@@ -34,7 +34,7 @@ func TestGetShakespearePokemonDescriptionFailedTranslation(t *testing.T) {
 
 func TestGetShakespearePokemonDescriptionSuccess(t *testing.T) {
 	ctx := context.Background()
-	a := NewTestApp(true, true)
+	a := newTestApp(true, true)
 	const pokemon = "test"
 
 	v, err := a.GetShakespearePokemonDescription(ctx, pokemon)

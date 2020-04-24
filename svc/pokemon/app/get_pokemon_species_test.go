@@ -12,11 +12,11 @@ import (
 
 func TestGetPokemonSpeciesPreCached(t *testing.T) {
 	ctx := context.Background()
-	a := NewTestApp(false, false)
+	a := newTestApp(false, false)
 	const pokemon = "test"
 
 	// Add our key to the lru cache.
-	a.(*app).pokeLRU.Add(pokeKey(pokemon), test.ExpectedModel)
+	a.pokeLRU.Add(pokeKey(pokemon), test.ExpectedModel)
 
 	v, err := a.GetPokemonSpecies(ctx, pokemon)
 
@@ -26,24 +26,24 @@ func TestGetPokemonSpeciesPreCached(t *testing.T) {
 
 func TestGetPokemonSpeciesNoCache(t *testing.T) {
 	ctx := context.Background()
-	a := NewTestApp(true, false)
+	a := newTestApp(true, false)
 	const pokemon = "test"
 
 	v, err := a.GetPokemonSpecies(ctx, pokemon)
 
 	assert.Nil(t, err)
 	assert.Equal(t, test.ExpectedModel, v)
-	assert.True(t, a.(*app).pokeLRU.Contains(pokeKey(pokemon)))
+	assert.True(t, a.pokeLRU.Contains(pokeKey(pokemon)))
 }
 
 func TestGetPokemonSpeciesError(t *testing.T) {
 	ctx := context.Background()
-	a := NewTestApp(false, false)
+	a := newTestApp(false, false)
 	const pokemon = "test"
 
 	v, err := a.GetPokemonSpecies(ctx, pokemon)
 
 	assert.Empty(t, v)
 	assert.Equal(t, pokeapi.ErrSpeciesNotFound, err)
-	assert.False(t, a.(*app).pokeLRU.Contains(pokeKey(pokemon)))
+	assert.False(t, a.pokeLRU.Contains(pokeKey(pokemon)))
 }
