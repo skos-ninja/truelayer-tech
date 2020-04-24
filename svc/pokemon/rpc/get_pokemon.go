@@ -20,7 +20,7 @@ func (r *rpc) GetPokemon(c *gin.Context) {
 		return
 	}
 
-	description, err := r.app.GetShakespearPokemonDescription(c, pokemonID)
+	description, err := r.app.GetShakespearePokemonDescription(c, pokemonID)
 	if err != nil {
 		if err == pokeapi.ErrSpeciesNotFound {
 			c.AbortWithStatus(http.StatusNotFound)

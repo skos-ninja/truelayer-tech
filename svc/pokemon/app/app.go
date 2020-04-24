@@ -12,9 +12,9 @@ import (
 
 type App interface {
 	GetPokemonSpecies(ctx context.Context, pokemon string) (*models.PokemonSpecies, error)
-	GetShakespearText(ctx context.Context, text string) (string, error)
+	GetShakespeareText(ctx context.Context, text string) (string, error)
 
-	GetShakespearPokemonDescription(ctx context.Context, pokemon string) (string, error)
+	GetShakespearePokemonDescription(ctx context.Context, pokemon string) (string, error)
 }
 
 type app struct {

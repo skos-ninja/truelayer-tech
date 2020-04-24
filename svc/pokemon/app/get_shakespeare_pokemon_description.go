@@ -4,7 +4,7 @@ import (
 	"context"
 )
 
-func (a *app) GetShakespearPokemonDescription(ctx context.Context, pokemon string) (string, error) {
+func (a *app) GetShakespearePokemonDescription(ctx context.Context, pokemon string) (string, error) {
 	species, err := a.GetPokemonSpecies(ctx, pokemon)
 	if err != nil {
 		return "", err
@@ -22,7 +22,7 @@ func (a *app) GetShakespearPokemonDescription(ctx context.Context, pokemon strin
 		}
 	}
 
-	description, err := a.GetShakespearText(ctx, flavorText)
+	description, err := a.GetShakespeareText(ctx, flavorText)
 	if err != nil {
 		return "", err
 	}
