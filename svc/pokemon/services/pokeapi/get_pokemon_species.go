@@ -14,7 +14,7 @@ import (
 var ErrSpeciesNotFound = errors.New("pokemon species not found")
 
 // GetPokemonSpecies implements a request wrapper for https://pokeapi.co/docs/v2.html/#pokemon-species
-func (p *service) GetPokemonSpecies(ctx context.Context, pokemon string) (*models.PokemonSpecies, error) {
+func (s *service) GetPokemonSpecies(ctx context.Context, pokemon string) (*models.PokemonSpecies, error) {
 	// Ensure our request can't just hang forever
 	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 	defer cancel()
@@ -24,7 +24,7 @@ func (p *service) GetPokemonSpecies(ctx context.Context, pokemon string) (*model
 		return nil, err
 	}
 
-	resp, err := p.client.Do(req)
+	resp, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
 	}
